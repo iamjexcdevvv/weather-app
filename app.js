@@ -16,35 +16,23 @@ const weather = {
     const data = await response.json();
 
     try {
-      displayData(
-        data.name,
-        data.main.temp,
-        data.weather[0].description,
-        data.main.humidity,
-        data.wind.speed,
-        data.weather[0].icon
-      );
+      displayData(data);
     } catch (error) {
       alert("No weather found!");
     }
   },
 };
 
-function displayData(
-  cityName,
-  temperature,
-  description,
-  humidity,
-  windSpeed,
-  icon
-) {
-  document.body.style.backgroundImage = `url("https://source.unsplash.com/1600x900/?${cityName}")`;
-  cityNameElement.textContent = `Weather in ${cityName}`;
-  tempElement.textContent = `${temperature}°C`;
-  iconElement.src = `https://openweathermap.org/img/wn/${icon}.png`;
-  descriptionElement.textContent = description;
-  humidityElement.textContent = `Humidity: ${humidity}%`;
-  windElement.textContent = `Wind speed: ${windSpeed} km/h`;
+function displayData({ name, main, weather, wind }) {
+  document.body.style.backgroundImage = `url("https://source.unsplash.com/1600x900/?${name}")`;
+  cityNameElement.textContent = `Weather in ${name}`;
+  tempElement.textContent = `${main.temp}°C`;
+  iconElement.src =
+    "https://openweathermap.org/img/wn/" + weather[0].icon + ".png";
+  descriptionElement.textContent = weather[0].description;
+  humidityElement.textContent = `Humidity: ${main.humidity}%`;
+  windElement.textContent = `Wind speed: ${wind.speed} km/h`;
+
   weatherDataElem.classList.remove("loading");
 }
 
