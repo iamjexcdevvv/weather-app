@@ -1,5 +1,5 @@
 const searchBar = document.querySelector(".search-bar");
-const searchButton = document.querySelector("button");
+const searchButton = document.querySelector(".search > button");
 const cityNameElement = document.querySelector(".city");
 const tempElement = document.querySelector(".temp");
 const iconElement = document.querySelector(".icon");
@@ -10,14 +10,16 @@ const weatherDataElem = document.querySelector(".weather");
 
 const weather = {
   apiKey: "b84459078c0bb3a4527cb234e6616f57",
-  fetchWeather: async function () {
-    const response = await fetch(`
-        https://api.openweathermap.org/data/2.5/weather?q=${searchBar.value}&units=metric&appid=${this.apiKey}`);
-    const data = await response.json();
-
+  async fetchWeather() {
     try {
+      const response = await fetch(`
+        https://api.openweathermap.org/data/2.5/weather?q=${searchBar.value}&units=metric&appid=${this.apiKey}`);
+      const data = await response.json();
       displayData(data);
     } catch (error) {
+      if (!weatherDataElem.classList.contains("loading"))
+        weatherDataElem.classList.add("loading");
+
       alert("No weather found!");
     }
   },
