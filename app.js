@@ -27,13 +27,13 @@ const weather = {
 
 function displayData({ name, main, weather, wind }) {
   document.body.style.backgroundImage = `url("https://source.unsplash.com/1600x900/?${name}")`;
-  cityNameElement.textContent = `Weather in ${name}`;
-  tempElement.textContent = `${main.temp}°C`;
+  cityNameElement.innerText = `Weather in ${name}`;
+  tempElement.innerText = `${main.temp}°C`;
   iconElement.src =
     "https://openweathermap.org/img/wn/" + weather[0].icon + ".png";
-  descriptionElement.textContent = weather[0].description;
-  humidityElement.textContent = `Humidity: ${main.humidity}%`;
-  windElement.textContent = `Wind speed: ${wind.speed} km/h`;
+  descriptionElement.innerText = weather[0].description;
+  humidityElement.innerText = `Humidity: ${main.humidity}%`;
+  windElement.innerText = `Wind speed: ${wind.speed} km/h`;
 
   weatherDataElem.classList.remove("loading");
 }
